@@ -199,11 +199,31 @@ searchResultSets.forEach(
 In theory, everything can be mapped into 4 steps:
 
 1. _What collections do I have?_
-
-   - User type events
-
-   - JSON from the server
-
 2. _What collections do I want?_
 3. _How can we convert the collections we have to the collections we want?_
 4. _Once we got the collections we want, what do I going to do with them?_
+
+## 1.7 Multi-dimensional Observables
+
+This is an example of a video player
+
+```js
+var authorizations = player
+  .init()
+  .map(() =>
+    playAttempts
+      .map(movieId =>
+        player
+          .authorize(movieId)
+          .cache(err => Observable.empty)
+          .takeUntil(cancels)
+      )
+      .concatAll()
+  )
+  .concatAll();
+
+authorizations.forEach(
+  license => player.play(license),
+  error => showDialog("Sorry, this movie can't be played")
+);
+```
