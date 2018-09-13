@@ -227,3 +227,43 @@ authorizations.forEach(
   error => showDialog("Sorry, this movie can't be played")
 );
 ```
+
+# 2. Exercise Notes
+
+(http://reactivex.io/learnrx/)
+
+The most useful functions in rxjs / fp:
+
+- map
+- filter
+- concatAll
+- reduce
+- zip
+
+Exercise 4 Implement `map`
+
+```js
+Array.prototype.map = function(projectionFunction) {
+  var results = [];
+  this.forEach(function(itemInArray) {
+    results.push(projectionFunction(itemInArray));
+  });
+
+  return results;
+};
+```
+
+Exercise 7 Implement `filter`
+
+```js
+Array.prototype.filter = function(predicateFunction) {
+  var results = [];
+  this.forEach(function(itemInArray) {
+    if (predicateFunction(itemInArray)) {
+      results.push(itemInArray);
+    }
+  });
+
+  return results;
+};
+```
